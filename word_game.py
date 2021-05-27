@@ -1,7 +1,7 @@
 """
 File: word_guess.py
 -------------------
-Fill in this comment.
+
 """
 import random
 
@@ -11,8 +11,8 @@ INITIAL_GUESSES = 8             # Initial number of guesses player starts with
 def play_game(secret_word):
     INITIAL_GUESSES=8
     guessed_word ='-'*len(secret_word)
-    flag=False
-    while not flag:
+    flag=0
+    while flag==0:
     	print("The word now looks like this:",guessed_word)
     	print("you have",INITIAL_GUESSES,'guesses left')
     	letter=input("Type a single letter here, then press enter: ")
@@ -31,10 +31,10 @@ def play_game(secret_word):
     			INITIAL_GUESSES-=1
     		if guessed_word==secret_word:
     			print('Congratulations, the word is: ',secret_word)
-    			flag=True
+    			flag=1
     		if INITIAL_GUESSES==0:
     			print("Sorry, you lost. The secret word was: ",secret_word)
-    			flag=True
+    			flag=1
     	else:
     		print("Guess should only be a single character.")
     		
@@ -43,7 +43,10 @@ def get_word():
     with open (LEXICON_FILE) as f:
     	text=f.readlines()
     a=[ ]
-    [a.append(line.rstrip("\n")) for line in text ]
+    #[a.append(line.rstrip("\n")) for line in text ]
+    for line in text:
+    	text=line.rstrip("\n")
+    	a.append(text)
     length=len(a)
     random_number=random.randrange(length)
     secret_word=a[random_number]
